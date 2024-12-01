@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>MSI 笔记本满意度调查</title>
+</head>
+<body>
+  <div class="container">
+     <header class="header">
+    <h1 id="title" class="text-center">MSI笔记本满意度调查</h1>
+  <p id="description" class="text-center description">谢谢你花时间来完成此问卷</p>
+  </header>
+  <form id="survey-form">
+    <div class="form-group">
+      <label id="name-label" for="name">姓名</label>
+        <input id="name" type="text" class="form-control" required placeholder="请输入姓名" />
+        
+    </div>
+    <div class="form-group">
+      <label id="email-label" for="email">邮箱</label>
+        <input id="email" type="email" class="form-control" required placeholder="请输入邮箱" />       
+    </div>
+    <div class="form-group">
+      <label for="number" id="number-label">年龄<span class="clue">（可选）</span></label>
+        <input id="number" type="number" min="0" max="99" class="form-control" placeholder="请输入年龄" />  
+    </div>
+    <div class="form-group">
+      <p>你的工作更接近与哪一种？
+        </p>
+      <select id="dropdown" class="form-control" name="role" required>
+        <option disabled selected  value>选择你的工作</option>
+        <option>老师</option>
+        <option>开发者</option>
+        <option>学生</option>
+        <option>其他</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <p>你会推荐微星笔记本给朋友吗？</p>
+      <label>
+            <input name="user-recommend" value="definitely" type="radio" class="input-radio" checked="">肯定会</label>
+            <label>
+            <input name="user-recommend" value="maybe" type="radio" class="input-radio" checked="">也许</label>
+           <label> <input name="user-recommend" value="not-sure" type="radio" class="input-radio" checked="">不确定</label>
+    </div>
+    <div class="form-group">
+      <p>
+            微星笔记本有何改进之处？
+            <span class="clue">(多选)</span>
+          </p>
+          <label><input name="prefer" value="outlook" type="checkbox" class="input-checkbox">外观</label>
+          <label><input name="prefer" value="heat" type="checkbox" class="input-checkbox">散热</label>
+          <label><input name="prefer" value="performance" type="checkbox" class="input-checkbox">性能</label>
+          <label><input name="prefer" value="aftersale" type="checkbox" class="input-checkbox">售后</label>
+      </div>
+      <div class="form-group">
+          <p>任何其他建议</p>
+          <textarea id="comments" class="input-textarea" name="comment" placeholder="请在此输入您的建议……"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" id="submit" class="submit-button">
+            提交
+          </button>
+        </div>
+  </form>
+  </div>
+ 
+</body>
+</html>
