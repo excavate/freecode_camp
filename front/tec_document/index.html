@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>Vue3入门</header>
+      <ul>
+        <li><a class="nav-link" href="#介绍">介绍</a></li>
+        <li><a class="nav-link" href="#前提条件">前提条件</a></li>
+        <li><a class="nav-link" href="#创建应用">创建应用</a></li>
+        <li><a class="nav-link" href="#挂载应用">挂载应用</a></li>
+        <li><a class="nav-link" href="#应用配置">应用配置</a></li>
+        <li><a class="nav-link" href="#多个应用实例">多个应用实例</a></li>
+      </ul>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="介绍">
+        <header>介绍</header>
+        <p>Vue (发音为 /vjuː/，类似 view) 是一款用于构建用户界面的 JavaScript 框架。它基于标准 HTML、CSS 和 JavaScript 构建，并提供了一套声明式的、组件化的编程模型，帮助你高效地开发用户界面。无论是简单还是复杂的界面，Vue 都可以胜任。</p>
+        <p>下面是一个最基本的示例：</p>
+        <code>
+          import { createApp, ref } from 'vue'
+          
+createApp({
+  setup() {
+    return {
+      count: ref(0)
+    }
+  }
+}).mount('#app')
+        </code>
+        <code>
+          <div id="app">
+  &lt;button @click="count++"&gt;
+    Count is: &lt;{{ count }}&gt;
+  &lt;/button&gt;
+</div>
+        </code>
+        <p>上面的示例展示了 Vue 的两个核心功能：</p>
+        <ul>
+          <li><strong>声明式渲染：</strong>Vue 基于标准 HTML 拓展了一套模板语法，使得我们可以声明式地描述最终输出的 HTML 和 JavaScript 状态之间的关系。</li>
+          <li><strong>响应性：</strong>Vue 会自动跟踪 JavaScript 状态并在其发生变化时响应式地更新 DOM。</li>
+        </ul>
+      </section>
+      <section class="main-section" id="前提条件">
+        <header>前提条件</header>
+        <ul>
+          <li>熟悉命令行</li>
+          <li>已安装 18.3 或更高版本的 Node.js</li>
+          <li>熟悉html</li>
+        </ul>
+      </section>
+      <section class="main-section" id="创建应用">
+        <header>创建应用</header>
+        <h1>应用实例</h1>
+        <p>每个 Vue 应用都是通过 createApp 函数创建一个新的 应用实例：</p>
+        <code>
+          import { createApp } from 'vue'
+
+const app = createApp({
+  /* 根组件选项 */
+})
+        </code>
+        <h1>
+          根组件
+        </h1>
+        <p>我们传入 createApp 的对象实际上是一个组件，每个应用都需要一个“根组件”，其他组件将作为其子组件。</p>
+        <p>如果你使用的是单文件组件，我们可以直接从另一个文件中导入根组件。</p>
+        <code>
+          import { createApp } from 'vue'
+// 从一个单文件组件中导入根组件
+import App from './App.vue'
+
+const app = createApp(App)
+        </code>
+        <p>虽然本指南中的许多示例只需要一个组件，但大多数真实的应用都是由一棵嵌套的、可重用的组件树组成的。例如，一个待办事项 (Todos) 应用的组件树可能是这样的：</p>
+        <code>
+          App (root component)
+├─ TodoList
+│  └─ TodoItem
+│     ├─ TodoDeleteButton
+│     └─ TodoEditButton
+└─ TodoFooter
+   ├─ TodoClearButton
+   └─ TodoStatistics
+        </code>
+      </section>
+      <section class="main-section" id="挂载应用">
+        <header>挂载应用</header>
+        <p>应用实例必须在调用了 .mount() 方法后才会渲染出来。该方法接收一个“容器”参数，可以是一个实际的 DOM 元素或是一个 CSS 选择器字符串：</p>
+        <code>
+          &lt;div id="app"&gt;&lt;/div&gt;
+          app.mount('#app')
+        </code>
+        <p>应用根组件的内容将会被渲染在容器元素里面。容器元素自己将不会被视为应用的一部分。</p>
+        <p>.mount() 方法应该始终在整个应用配置和资源注册完成后被调用。同时请注意，不同于其他资源注册方法，它的返回值是根组件实例而非应用实例。</p>
+      </section>
+      <section class="main-section" id="应用配置">
+        <header>应用配置</header>
+        <p>应用实例会暴露一个 .config 对象允许我们配置一些应用级的选项，例如定义一个应用级的错误处理器，用来捕获所有子组件上的错误：</p>
+        <code>
+          app.config.errorHandler = (err) => {
+  /* 处理错误 */
+}
+        </code>
+        <p>应用实例还提供了一些方法来注册应用范围内可用的资源，例如注册一个组件：</p>
+        <code>
+          app.component('TodoDeleteButton', TodoDeleteButton)
+        </code>
+        <p>这使得 TodoDeleteButton 在应用的任何地方都是可用的。我们会在指南的后续章节中讨论关于组件和其他资源的注册。你也可以在 API 参考中浏览应用实例 API 的完整列表。</p>
+        <p>确保在挂载应用实例之前完成所有应用配置！</p>
+      </section>
+      <section class="main-section" id="多个应用实例">
+        <header>多个应用实例</header>
+        <p>应用实例并不只限于一个。createApp API 允许你在同一个页面中创建多个共存的 Vue 应用，而且每个应用都拥有自己的用于配置和全局资源的作用域。</p>
+        <code>
+          const app1 = createApp({
+  /* ... */
+})
+app1.mount('#container-1')
+
+const app2 = createApp({
+  /* ... */
+})
+app2.mount('#container-2')
+        </code>
+        <p>
+          如果你正在使用 Vue 来增强服务端渲染 HTML，并且只想要 Vue 去控制一个大型页面中特殊的一小部分，应避免将一个单独的 Vue 应用实例挂载到整个页面上，而是应该创建多个小的应用实例，将它们分别挂载到所需的元素上去。
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
